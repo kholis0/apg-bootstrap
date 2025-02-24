@@ -60,11 +60,22 @@ if ($foto == "") {
 if ($error != "") {
     echo $error;
     echo "<meta http-equiv='refresh' content='2; url=?hal=pegawai_edit'>";
-} elseif ($result) {
-    echo "Berhasil memperbaharui data pegawai <b>$nama</b>";
-    echo "<meta http-equiv='refresh' content='5; url=?hal=pegawai'>";
+} elseif ($result) {?>
+<script>
+Swal.fire({
+    position: "top-end",
+    icon: "success",
+    title: "Data Pegawai berhasil diupdate",
+    showConfirmButton: false,
+    timer: 1500
+});
+</script>
+<?php
+// echo "Berhasil memperbaharui data pegawai <b>$nama</b>";
+echo "
+<meta http-equiv='refresh' content='2; url=?hal=pegawai'>";
 } else {
-    echo "Tidak dapat menyimpan data!<br>";
-    echo mysqli_error();
+echo "Tidak dapat menyimpan data!<br>";
+echo mysqli_error();
 }
 ?>

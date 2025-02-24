@@ -48,8 +48,18 @@ if ($foto == "") {
 if ($error != "") {
     echo $error;
     echo "<meta http-equiv='refresh' content='2; url=?hal=pegawai_tambah'>";
-} elseif ($result) {
-    echo "Berhasil menambahkan data pegawai <b>$nama</b>";
+} elseif ($result) {?>
+<script>
+Swal.fire({
+    position: "top-end",
+    icon: "success",
+    title: "Data Pegawai berhasil diupdate",
+    showConfirmButton: false,
+    timer: 1500
+});
+</script>
+<?php
+    // echo "Berhasil menambahkan data pegawai <b>$nama</b>";
     echo "<meta http-equiv='refresh' content='1; url=?hal=pegawai'>";
 } else {
     echo "Tidak dapat menyimpan data!<br>";

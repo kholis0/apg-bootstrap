@@ -2,24 +2,28 @@
 if (!defined("INDEX")) die("");
 ?>
 
-<h2 class="judul">Data pegawai</h2>
-<a href="?hal=pegawai_tambah" class="tombol">Tambah</a>
+<h4 class="mt-2">Data pegawai</h4>
+<hr>
+<a class="btn btn-success mb-3" href="?hal=pegawai_tambah">
+    <i class="bi bi-plus"></i>Tambah</a>
 
-<table class="table">
-    <thead>
-        <tr>
-            <th>No</th>
-            <th>Foto</th>
-            <th>Nama</th>
-            <th>Jenis Kelamin</th>
-            <th>Tanggal Lahir</th>
-            <th>pegawai</th>
-            <th>Keterangan</th>
-            <th>Aksi</th>
-        </tr>
-    </thead>
-    <tbody>
-        <?php
+
+<div class="table-responsive">
+    <table class="table table-striped table-hover table-bordered">
+        <thead class="thead-dark">
+            <tr>
+                <th>No</th>
+                <th>Foto</th>
+                <th>Nama</th>
+                <th>Jenis Kelamin</th>
+                <th>Tanggal Lahir</th>
+                <th>pegawai</th>
+                <th>Keterangan</th>
+                <th>Aksi</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php
         $query = "SELECT * FROM pegawai ";
         $query .= "LEFT JOIN jabatan ";
         $query .= "ON pegawai.id_pegawai = jabatan.id_jabatan ";
@@ -30,31 +34,33 @@ if (!defined("INDEX")) die("");
         while ($data = mysqli_fetch_assoc($result)) {
             $no++;
         ?>
-        <tr>
-            <td><?= $no ?></td>
-            <td>
-                <?php 
+            <tr>
+                <td><?= $no ?></td>
+                <td>
+                    <?php 
                 if (isset($data['foto'])) {
                     ?>
-                <img src="images/<?=$data['foto']?>" width="100">
-                <?php
+                    <img src="images/<?=$data['foto']?>" width="100">
+                    <?php
                 }
                 ?>
 
-            </td>
-            <td><?= $data['nama_pegawai'] ?></td>
-            <td><?= $data['jenis_kelamin'] ?></td>
-            <td><?= $data['tgl_lahir'] ?></td>
-            <td><?= $data['nama_jabatan'] ?></td>
-            <td><?= $data['keterangan'] ?></td>
-            <td>
-                <a href=" ?hal=pegawai_edit&id=<?= $data['id_pegawai'] ?>" class="tombol edit"> Edit</a>
-                <a href="?hal=pegawai_hapus&id=<?= $data['id_pegawai'] ?>&foto=<?$data['foto']?>" class="tombol hapus">
-                    Hapus</a>
-            </td>
-        </tr>
-        <?php
+                </td>
+                <td><?= $data['nama_pegawai'] ?></td>
+                <td><?= $data['jenis_kelamin'] ?></td>
+                <td><?= $data['tgl_lahir'] ?></td>
+                <td><?= $data['nama_jabatan'] ?></td>
+                <td><?= $data['keterangan'] ?></td>
+                <td>
+                    <a href="?hal=pegawai_edit&id=<?= $data['id_pegawai'] ?>" class="btn btn-sm btn-warning">
+                        Edit</a>
+                    <a href="?hal=pegawai_hapus&id=<?= $data['id_pegawai'] ?>" class="btn btn-sm btn-danger">
+                        Hapus</a>
+                </td>
+            </tr>
+            <?php
         }
         ?>
-    </tbody>
-</table>
+        </tbody>
+    </table>
+</div>
